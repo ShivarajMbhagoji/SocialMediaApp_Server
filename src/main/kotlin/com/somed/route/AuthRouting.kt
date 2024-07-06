@@ -14,7 +14,7 @@ import org.koin.ktor.ext.inject
 fun Route.authRouting(){
     val repository by inject<UserRepository>()
 
-    route("/signup"){
+    route("signup"){
         post {
             val params=call.receiveNullable<SignUpParams>()
 
@@ -39,7 +39,7 @@ fun Route.authRouting(){
     }
 
 
-    route("/login"){
+    route("login"){
         post {
             val params=call.receiveNullable<SignInParams>()
 

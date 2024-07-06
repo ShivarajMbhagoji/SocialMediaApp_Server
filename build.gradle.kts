@@ -45,4 +45,7 @@ dependencies {
 
     implementation("com.zaxxer:HikariCP:$hikaricp_version")
     implementation("io.insert-koin:koin-ktor:$koin_version")
+
+    
+
 }

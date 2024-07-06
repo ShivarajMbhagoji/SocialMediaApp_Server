@@ -29,7 +29,7 @@ object DatabaseFactory {
             isAutoCommit=false
             transactionIsolation="TRANSACTION_REPEATABLE_READ"
             username="postgres"
-            password="shivaraj"
+            password="Shivu121314"
             validate()
         }
 
