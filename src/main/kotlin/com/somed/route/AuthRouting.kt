@@ -3,7 +3,7 @@ package com.somed.route
 import com.somed.model.AuthResponse
 import com.somed.model.SignInParams
 import com.somed.model.SignUpParams
-import com.somed.repository.UserRepository
+import com.somed.repository.auth.AuthRepository
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
@@ -12,7 +12,7 @@ import io.ktor.server.routing.*
 import org.koin.ktor.ext.inject
 
 fun Route.authRouting(){
-    val repository by inject<UserRepository>()
+    val repository by inject<AuthRepository>()
 
     route("signup"){
         post {

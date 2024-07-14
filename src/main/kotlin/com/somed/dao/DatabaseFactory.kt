@@ -1,6 +1,6 @@
 package com.somed.dao
 
-import com.somed.model.UserRow
+import com.somed.dao.User.UserTable
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import org.jetbrains.exposed.sql.Database
@@ -14,7 +14,7 @@ object DatabaseFactory {
 
         Database.connect(createHikariDataSource())
         transaction {
-            SchemaUtils.create(UserRow)
+            SchemaUtils.create(UserTable)
         }
     }
 

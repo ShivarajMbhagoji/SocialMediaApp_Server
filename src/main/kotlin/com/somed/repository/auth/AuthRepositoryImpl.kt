@@ -1,4 +1,4 @@
-package com.somed.repository
+package com.somed.repository.auth
 
 import com.somed.dao.User.UserDao
 import com.somed.model.*
@@ -6,9 +6,9 @@ import com.somed.plugins.generateToken
 import com.somed.utils.Response
 import io.ktor.http.*
 
-class UserRepositoryImpl(
+class AuthRepositoryImpl(
     private val userDao: UserDao
-) : UserRepository {
+) : AuthRepository {
     override suspend fun signUp(params: SignUpParams): Response<AuthResponse> {
         return if(userAlreadyExist(params.email)){
             Response.Error(
@@ -61,7 +61,9 @@ class UserRepositoryImpl(
                             id = user.id,
                             name = user.name,
                             bio = user.bio,
-                            token = generateToken(params.email )
+                            token = generateToken(params.email ),
+                            followingCount = user.followingCount,
+                            followersCount = user.followersCount
                         )
                     )
                 )
