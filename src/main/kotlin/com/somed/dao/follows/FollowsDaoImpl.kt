@@ -45,6 +45,14 @@ class FollowsDaoImpl :FollowsDao {
         }
     }
 
+    override suspend fun getAllFollowing(userId: Long): List<Long> {
+        return dbQuery {
+            FollowsTable
+                .select { FollowsTable.followerId eq userId }
+                .map { it[FollowsTable.followingId] }
+        }
+    }
+
     override suspend fun isAlreadyFollowing(follower: Long, following: Long): Boolean {
         return dbQuery {
             val queryResult = FollowsTable.select {
