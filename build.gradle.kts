@@ -7,6 +7,7 @@ val exposed_version: String by project
 
 val koin_version: String by project
 val hikaricp_version: String by project
+val ktor_version:String by project
 
 plugins {
     kotlin("jvm") version "2.0.0"
@@ -49,4 +50,7 @@ dependencies {
 
     implementation("de.mkammerer.snowflake-id:snowflake-id:0.0.2")
     implementation("org.jetbrains.exposed:exposed-java-time:$exposed_version")
+
+    implementation("io.ktor:ktor-server-auth:$ktor_version")
+    implementation("io.ktor:ktor-server-auth-jwt:$ktor_version")
 }

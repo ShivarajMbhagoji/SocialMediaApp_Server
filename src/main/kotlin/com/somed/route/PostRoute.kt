@@ -19,7 +19,6 @@ import kotlinx.serialization.decodeFromString
 import kotlinx.serialization.json.Json
 import org.koin.ktor.ext.inject
 import java.io.File
-import kotlin.text.get
 
 fun Routing.postRouting(){
     val postRepository by inject<PostRepository>()

@@ -2,6 +2,7 @@ package com.somed.dao.User
 
 import com.somed.dao.DatabaseFactory.dbQuery
 import com.somed.model.SignUpParams
+import com.somed.security.hashPassword
 import com.somed.utils.IdGenerator
 import org.jetbrains.exposed.sql.ResultRow
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
@@ -17,7 +18,7 @@ class UserDaoImpl:UserDao {
                 it[id]=IdGenerator.generateId()
                 it[name] = params.name
                 it[email] = params.email
-                it[password] = params.password
+                it[password] = hashPassword(params.password)
             }
 
             insertStatement.resultedValues?.singleOrNull()?.let {

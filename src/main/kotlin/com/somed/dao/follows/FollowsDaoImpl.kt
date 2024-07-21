@@ -4,13 +4,14 @@ import com.somed.dao.DatabaseFactory.dbQuery
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
-class FollowsDaoImpl :FollowsDao {
+class FollowsDaoImpl : FollowsDao {
     override suspend fun followUser(follower: Long, following: Long): Boolean {
         return dbQuery{
             val insertStatement = FollowsTable.insert {
                 it[followerId] = follower
                 it[followingId] = following
             }
+
             insertStatement.resultedValues?.singleOrNull() != null
         }
     }
@@ -26,22 +27,22 @@ class FollowsDaoImpl :FollowsDao {
     override suspend fun getFollowers(userId: Long, pageNumber: Int, pageSize: Int): List<Long> {
         return dbQuery {
             FollowsTable.select {
-                FollowsTable.followerId eq userId
+                FollowsTable.followingId eq userId
             }
                 .orderBy(FollowsTable.followDate, SortOrder.DESC)
                 .limit(n = pageSize, offset = ((pageNumber -1) * pageSize).toLong())
-                .map { it[FollowsTable.followingId] }
+                .map { it[FollowsTable.followerId] }
         }
     }
 
     override suspend fun getFollowing(userId: Long, pageNumber: Int, pageSize: Int): List<Long> {
         return dbQuery {
             FollowsTable.select {
-                FollowsTable.followingId eq userId
+                FollowsTable.followerId eq userId
             }
                 .orderBy(FollowsTable.followDate, SortOrder.DESC)
                 .limit(n = pageSize, offset = ((pageNumber -1) * pageSize).toLong())
-                .map { it[FollowsTable.followerId] }
+                .map { it[FollowsTable.followingId] }
         }
     }
 

@@ -3,6 +3,7 @@ package com.somed.repository.auth
 import com.somed.dao.User.UserDao
 import com.somed.model.*
 import com.somed.plugins.generateToken
+import com.somed.security.hashPassword
 import com.somed.utils.Response
 import io.ktor.http.*
 
@@ -54,7 +55,9 @@ class AuthRepositoryImpl(
                 )
             )
         }else{
-            if(user.password==params.password){
+            val hashedPassword= hashPassword(params.password)
+
+            if(user.password==hashedPassword){
                 Response.Success(
                     data = AuthResponse(
                         data = AuthResponseData(

@@ -6,10 +6,10 @@ import com.somed.model.FollowAndUnfollowResponse
 import com.somed.utils.Response
 import io.ktor.http.*
 
-class FollowsRepositoryImpl (
+class FollowsRepositoryImpl(
     private val userDao: UserDao,
     private val followDao: FollowsDao
-): FollowsRepository {
+) : FollowsRepository {
     override suspend fun followUser(follower: Long, following: Long): Response<FollowAndUnfollowResponse> {
         return if(followDao.isAlreadyFollowing(follower, following)){
             Response.Error(
