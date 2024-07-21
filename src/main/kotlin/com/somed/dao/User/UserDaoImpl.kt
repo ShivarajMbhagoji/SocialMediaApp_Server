@@ -52,6 +52,24 @@ class UserDaoImpl:UserDao {
         }
     }
 
+    override suspend fun findById(userId: Long): UserRow? {
+        return dbQuery {
+            UserTable.select { UserTable.id eq userId }
+                .map { rowToUser(it) }
+                .singleOrNull()
+        }
+    }
+
+    override suspend fun updateUser(userId: Long, name: String, bio: String, imageUrl: String?): Boolean {
+        return dbQuery {
+            UserTable.update(where = {UserTable.id eq userId}){
+                it[UserTable.name] = name
+                it[UserTable.bio] = bio
+                it[UserTable.imageUrl] = imageUrl
+            } > 0
+        }
+    }
+
 
     private fun rowToUser(row:ResultRow) : UserRow {
         return UserRow(
