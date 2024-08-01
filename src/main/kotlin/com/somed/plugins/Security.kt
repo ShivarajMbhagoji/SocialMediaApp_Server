@@ -58,6 +58,6 @@ fun generateToken(email: String): String{
         .withAudience(jwtAudience)
         .withIssuer(jwtIssuer)
         .withClaim(CLAIM, email)
-        .withExpiresAt(Date(System.currentTimeMillis() + 60000))
+//        .withExpiresAt(Date(System.currentTimeMillis() + 60000))
         .sign(Algorithm.HMAC256(jwtSecret))
 }
